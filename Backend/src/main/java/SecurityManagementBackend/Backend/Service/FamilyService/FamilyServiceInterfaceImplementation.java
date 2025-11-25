@@ -3,11 +3,14 @@ package SecurityManagementBackend.Backend.Service.FamilyService;
 import SecurityManagementBackend.Backend.Exception.FamilyNotFoundException;
 import SecurityManagementBackend.Backend.Exception.FlatAlreadyAssignedException;
 import SecurityManagementBackend.Backend.Model.Family;
+import SecurityManagementBackend.Backend.Model.Member;
 import SecurityManagementBackend.Backend.Repositry.FamilyRepo;
 import SecurityManagementBackend.Backend.Repositry.FlatRepo;
 import SecurityManagementBackend.Backend.Service.FamilyServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,9 +52,33 @@ public class FamilyServiceInterfaceImplementation implements FamilyServiceInterf
         Family getFamily = familyRepo.findById(familyId).orElseThrow(() ->  new FamilyNotFoundException(familyId,"This Family Id does'nt Exist"));
         getFamily.setFamilyName(updateFamilyProfile.getFamilyName());
         getFamily.setFlat(updateFamilyProfile.getFlat());
-        getFamily.setFamilyName(updateFamilyProfile.getFamilyName());
+        getFamily.setMemberList(updateFamilyProfile.getMemberList());
+        familyRepo.save(getFamily);
 
         return getFamily;
 
+    }
+
+    @Override
+    public void deleteFamilyById(Long familyId) {
+      getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId,"Can't Delete This Family It Not Exist "));
+      familyRepo.deleteById(familyId);
+    }
+
+    @Override
+    public void addFamilyMembers(List<Member> memberList, Long familyId) {
+       Family family  = getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
+       List<Member> familyMemberList  =  family.getMemberList();
+       memberList.forEach(value -> familyMemberList.add(value));
+       family.setMemberList(familyMemberList);
+       familyRepo.save(family);
+    }
+
+    @Override
+    public List<Member> getAllFamilyMemebers(Long familyId) {
+        Family family  = getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
+        List<Member> memberList = new ArrayList<>();
+        family.getMemberList().forEach(member -> memberList.add(member));
+        return memberList;
     }
 }

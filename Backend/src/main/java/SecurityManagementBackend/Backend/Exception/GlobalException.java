@@ -28,5 +28,11 @@ public class GlobalException {
         );
     }
 
+    @ExceptionHandler(ThisMemberDoNotExist.class)
+    public ResponseEntity<Map<String , Object>> memberDoNotExist(ThisMemberDoNotExist ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message",ex.getMessage()
+        ,"memberId",ex.getMemberId()));
+    }
+
 
 }

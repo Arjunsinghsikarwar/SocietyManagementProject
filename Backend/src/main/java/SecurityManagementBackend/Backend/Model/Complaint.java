@@ -1,9 +1,13 @@
+
 package SecurityManagementBackend.Backend.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
+@Table(name = "Complaint")
 public class Complaint {
 
     @Id
@@ -57,6 +61,8 @@ public class Complaint {
                 ", member=" + member +
                 '}';
     }
+
+
 }
 
 //
