@@ -10,15 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ComplaintControllerImplementation {
 
 
-    @PostMapping("/createNewComplaint")
-    public void createNewComplaint(){
 
-    }
-
-    @GetMapping("getAllComplaints")
-    public void getAllComplaints(){
-
-    }
 
 
 }
