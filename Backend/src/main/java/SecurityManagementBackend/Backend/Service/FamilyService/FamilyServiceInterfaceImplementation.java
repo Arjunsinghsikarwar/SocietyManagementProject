@@ -65,14 +65,22 @@ public class FamilyServiceInterfaceImplementation implements FamilyServiceInterf
       familyRepo.deleteById(familyId);
     }
 
-    @Override
-    public void addFamilyMembers(List<Member> memberList, Long familyId) {
-       Family family  = getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
-       List<Member> familyMemberList  =  family.getMemberList();
-       memberList.forEach(value -> familyMemberList.add(value));
-       family.setMemberList(familyMemberList);
-       familyRepo.save(family);
+@Override
+public void addFamilyMembers(List<Member> memberList, Long familyId) {
+    Family family  = getFamilyById(familyId)
+            .orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
+
+    List<Member> familyMemberList = family.getMemberList();
+
+    for (Member member : memberList) {
+        member.setFamily(family);     
+        familyMemberList.add(member);
     }
+
+    family.setMemberList(familyMemberList);
+    familyRepo.save(family); 
+}
+
 
     @Override
     public List<Member> getAllFamilyMemebers(Long familyId) {
