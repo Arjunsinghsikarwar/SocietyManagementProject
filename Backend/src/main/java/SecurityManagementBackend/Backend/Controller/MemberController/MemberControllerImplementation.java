@@ -3,8 +3,8 @@ package SecurityManagementBackend.Backend.Controller.MemberController;
 import SecurityManagementBackend.Backend.Model.Complaint;
 import SecurityManagementBackend.Backend.Model.Member;
 import SecurityManagementBackend.Backend.Service.MemberService.MemberServiceInterfaceImplementation;
+import SecurityManagementBackend.Backend.Service.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,7 @@ import java.util.Map;
 public class MemberControllerImplementation {
 
     @Autowired
-    private MemberServiceInterfaceImplementation memberService;
-
+    private MemberServiceInterface memberService;
 
 
     @GetMapping("/{memberId}")
@@ -38,7 +37,7 @@ public class MemberControllerImplementation {
     @DeleteMapping("/removeMember/{memberId}")
     public ResponseEntity<Map<String , Object>> removeMemberById(@PathVariable Long memberId){
         memberService.removeMeberById(memberId);
-        return ResponseEntity.status(HttpStatus.GONE).body(Map.of("message","Succesfully memebr got Removed"));
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","Succesfully memebr got Removed"));
     }
 
     @GetMapping("/{memberId}/getMemberComplaints")
@@ -48,5 +47,4 @@ public class MemberControllerImplementation {
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","Successsfully get All Complaints",
                 "complainList",getAllComplain));
     }
-
 }

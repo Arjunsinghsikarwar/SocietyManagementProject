@@ -13,8 +13,9 @@ public class Member {
     private Long id;
 
     private String name;
-    private int age;
     private String role;
+
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "family_id")
@@ -26,13 +27,7 @@ public class Member {
     public Member() {
     }
 
-    public int getAge() {
-        return age;
-    }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public List<Complaint> getComplaintList() {
         return complaintList;
@@ -54,9 +49,6 @@ public class Member {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -74,20 +66,26 @@ public class Member {
         this.role = role;
     }
 
-    public Member(int age, List<Complaint> complaintList, Family family, Long id, String name, String role) {
-        this.age = age;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Member(List<Complaint> complaintList, Family family , String name, String role , String password) {
+
         this.complaintList = complaintList;
         this.family = family;
-        this.id = id;
         this.name = name;
         this.role = role;
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "Member{" +
-                "age=" + age +
-                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
                 ", family=" + family +

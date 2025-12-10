@@ -23,17 +23,6 @@ public class FamilyServiceInterfaceImplementation implements FamilyServiceInterf
     @Autowired
     FlatRepo flatRepo;
 
-    @Override
-    public void createNewFamily(Family family) {
-
-        String flatNumber = family.getFlat().getFlatNumber();
-        int value = flatRepo.isFlatExist(flatNumber);
-
-        if(value > 0){
-            throw new FlatAlreadyAssignedException(flatNumber , "This Flat is already occupied by some other family");
-        }
-        familyRepo.save(family);
-    }
 
     @Override
     public List<Family> getAllFamily() {
@@ -41,10 +30,8 @@ public class FamilyServiceInterfaceImplementation implements FamilyServiceInterf
     }
 
     @Override
-    public Optional<Family> getFamilyById(Long familyId) {
-         Optional<Family> getFamily = familyRepo.findById(familyId);
-        if(getFamily.isEmpty()) throw new FamilyNotFoundException(familyId , "The Family Of This Id didnt't Exist");
-        return getFamily;
+    public Family getFamilyById(Long familyId) {
+        return familyRepo.findById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId,"This Family Does not Exist"));
     }
 
     @Override
@@ -61,22 +48,25 @@ public class FamilyServiceInterfaceImplementation implements FamilyServiceInterf
 
     @Override
     public void deleteFamilyById(Long familyId) {
-      getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId,"Can't Delete This Family It Not Exist "));
+      getFamilyById(familyId);
       familyRepo.deleteById(familyId);
     }
 
     @Override
     public void addFamilyMembers(List<Member> memberList, Long familyId) {
-       Family family  = getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
+       Family family  = getFamilyById(familyId);
        List<Member> familyMemberList  =  family.getMemberList();
-       memberList.forEach(value -> familyMemberList.add(value));
+       memberList.forEach(value -> {
+           value.setFamily(family);
+           familyMemberList.add(value);
+       });
        family.setMemberList(familyMemberList);
        familyRepo.save(family);
     }
 
     @Override
     public List<Member> getAllFamilyMemebers(Long familyId) {
-        Family family  = getFamilyById(familyId).orElseThrow(() -> new FamilyNotFoundException(familyId, "This Family Not Even Exist"));
+        Family family  = getFamilyById(familyId);
         List<Member> memberList = new ArrayList<>();
         family.getMemberList().forEach(member -> memberList.add(member));
         return memberList;

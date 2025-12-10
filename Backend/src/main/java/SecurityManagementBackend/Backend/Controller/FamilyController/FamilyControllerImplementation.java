@@ -3,7 +3,7 @@ package SecurityManagementBackend.Backend.Controller.FamilyController;
 
 import SecurityManagementBackend.Backend.Model.Family;
 import SecurityManagementBackend.Backend.Model.Member;
-import SecurityManagementBackend.Backend.Service.FamilyService.FamilyServiceInterfaceImplementation;
+import SecurityManagementBackend.Backend.Service.FamilyServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,8 @@ import java.util.Optional;
 public class FamilyControllerImplementation {
 
     @Autowired
-    FamilyServiceInterfaceImplementation familyService;
+    FamilyServiceInterface familyService;
 
-
-    @PostMapping("/createNewFamily")
-    public ResponseEntity<Map<String , String>> createNewFamily(@RequestBody Family family){
-            familyService.createNewFamily(family);
-            return ResponseEntity.status(200).body(Map.of("message","New Family Got Created Successfully"));
-    }
 
 
     @GetMapping("/getAllFamilies")
@@ -39,7 +33,7 @@ public class FamilyControllerImplementation {
     @GetMapping("/{familyId}")
     public ResponseEntity<Map<String , Object>> getFamilyById(@PathVariable Long familyId){
 
-        Optional<Family> getFamily = familyService.getFamilyById(familyId);
+       Family getFamily = familyService.getFamilyById(familyId);
 
         return ResponseEntity.status(200).body(Map.of("message","successfully Fetched",
                 "Family",getFamily));
@@ -50,7 +44,7 @@ public class FamilyControllerImplementation {
 
         Family updateFamily = familyService.updateFamily(familyId,updateFamilyProfile);
 
-        return ResponseEntity.status(HttpStatus.FOUND).body(Map.of("message","successfully Fetched",
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","successfully Fetched",
                 "Family",updateFamily));
     }
 

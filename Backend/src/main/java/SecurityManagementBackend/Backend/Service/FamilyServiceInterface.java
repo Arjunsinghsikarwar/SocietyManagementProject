@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FamilyServiceInterface {
-     void createNewFamily(Family family);
 
       List<Family> getAllFamily();
 
-      Optional<Family> getFamilyById(Long familyId);
+      Family getFamilyById(Long familyId);
 
       Family updateFamily(Long familyId , Family updateFamilyProfile);
 

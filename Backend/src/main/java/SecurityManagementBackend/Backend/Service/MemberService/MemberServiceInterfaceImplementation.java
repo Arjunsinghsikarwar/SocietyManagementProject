@@ -28,7 +28,6 @@ public class MemberServiceInterfaceImplementation implements MemberServiceInterf
     @Override
     public void updateSingleMemberById(Long memberId , Member member) {
       Member getMember = getSingleMember(memberId);
-      getMember.setAge(member.getAge());
       getMember.setFamily(member.getFamily());
       getMember.setName(member.getName());
       getMember.setComplaintList(member.getComplaintList());

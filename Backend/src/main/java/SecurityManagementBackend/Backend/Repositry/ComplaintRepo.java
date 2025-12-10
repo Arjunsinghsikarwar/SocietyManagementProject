@@ -25,4 +25,5 @@ public interface ComplaintRepo extends JpaRepository<Complaint,Long> {
     @Transactional
     @Query(value = "Delete from complaint c  where c.member_id = :memberId " ,nativeQuery = true)
     void removeAllComplainForMember(@Param(("memberId")) Long memberId);
+
 }

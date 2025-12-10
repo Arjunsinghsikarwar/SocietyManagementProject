@@ -20,14 +20,18 @@ public class Family {
     @OneToMany(mappedBy = "family",cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Member> memberList = new ArrayList<>();
 
+    @OneToOne(mappedBy = "family",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Leader leader;
+
     public Family() {
     }
 
-    public Family(Long familyId, String familyName, Flat flat, List<Member> memberList) {
-        this.familyId = familyId;
+
+    public Family(String familyName, Flat flat, List<Member> memberList , Leader leader ) {
         this.familyName = familyName;
         this.flat = flat;
         this.memberList = memberList;
+        this.leader = leader;
     }
 
     public Long getFamilyId() {
@@ -60,5 +64,13 @@ public class Family {
 
     public void setMemberList(List<Member> memberList) {
         this.memberList = memberList;
+    }
+
+    public Leader getLeader() {
+        return leader;
+    }
+
+    public void setLeader(Leader leader) {
+        this.leader = leader;
     }
 }

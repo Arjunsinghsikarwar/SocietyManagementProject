@@ -23,9 +23,8 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String description, Long id, Member member) {
+    public Complaint(String description , Member member) {
         this.description = description;
-        this.id = id;
         this.member = member;
     }
 

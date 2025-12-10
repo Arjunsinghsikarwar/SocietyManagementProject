@@ -3,6 +3,7 @@ package SecurityManagementBackend.Backend.Controller.ComplaintController;
 
 import SecurityManagementBackend.Backend.Model.Complaint;
 import SecurityManagementBackend.Backend.Service.ComplaintService.ComplaintServiceInterfaceImplementation;
+import SecurityManagementBackend.Backend.Service.ComplaintServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,11 @@ import java.util.Map;
 public class ComplaintControllerImplementation {
 
     @Autowired
-    private ComplaintServiceInterfaceImplementation complainService ;
+    private ComplaintServiceInterface complainService ;
 
     @GetMapping("/family/{familyId}")
     public ResponseEntity<Map<String , Object>>  getAllComplaintForSingleFamily(@PathVariable Long familyId){
         List<Complaint> getAllComplain = complainService.getAllComplainsForSingleFamily(familyId);
-
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","Successfully fetched All Complain for the Single Family",
                 "complainList",getAllComplain));
     }

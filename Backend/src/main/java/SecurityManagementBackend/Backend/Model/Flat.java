@@ -10,6 +10,7 @@ public class Flat {
     private Long id ;
     private String flatNumber;
 
+
     @OneToOne
     @JoinColumn(name = "family_id")
     private Family family;
@@ -17,10 +18,9 @@ public class Flat {
     public Flat() {
     }
 
-    public Flat(Family family, String flatNumber, Long id) {
+    public Flat(Family family, String flatNumber) {
         this.family = family;
         this.flatNumber = flatNumber;
-        this.id = id;
     }
 
     public Family getFamily() {

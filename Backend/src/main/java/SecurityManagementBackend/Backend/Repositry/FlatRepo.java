@@ -11,4 +11,7 @@ public interface FlatRepo extends JpaRepository<Flat,Long> {
 
     @Query(value = "Select count(*) from flat f where f.flat_number = :flatNumber ",nativeQuery = true)
     int isFlatExist(@Param("flatNumber") String flatNumber);
+
+    @Query(value = "Select * from flat f where f.flat_number = :flatNumber" , nativeQuery = true)
+    Flat findByFlatNumber(@Param("flatNumber") String flatNumber);
 }
