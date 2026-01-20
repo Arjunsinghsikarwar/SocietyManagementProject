@@ -1,6 +1,7 @@
 package SecurityManagementBackend.Backend.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -16,6 +17,7 @@ public class Leader{
 
     @OneToOne
     @JoinColumn(name = "family_id")
+    @JsonIgnore
     Family family;
 
 

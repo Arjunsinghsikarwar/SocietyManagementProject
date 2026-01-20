@@ -12,7 +12,7 @@ public class RegisterUser {
     public RegisterUser() {
     }
 
-    public RegisterUser(String password, String role, String userName) {
+    public RegisterUser(String userName, String password, String role) {
         this.password = password;
         this.role = role;
         this.userName = userName;

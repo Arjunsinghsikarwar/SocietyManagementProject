@@ -38,4 +38,9 @@ public class ComplaintControllerImplementation {
         complainService.removeAllComplaintForEachMember(memberId);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","Successfully Removed All Complaint for the This Member"));
         }
+
+        @PostMapping("/addNewComplaint/{memberId}")
+       public ResponseEntity<Complaint> addNewComplaint(@RequestBody Complaint complaint , @PathVariable Long memberId){
+        return ResponseEntity.status(HttpStatus.OK).body(complainService.addNewComplaint(complaint,memberId));
+        }
 }

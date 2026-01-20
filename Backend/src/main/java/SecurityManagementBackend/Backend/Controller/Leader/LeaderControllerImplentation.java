@@ -20,15 +20,15 @@ public class LeaderControllerImplentation {
     private LeaderServiceInterface leaderService;
 
 
-    @PostMapping("/register")
-    public ResponseEntity<Map<String,Object>> registerNewLeader(@RequestBody Leader leader){
-     LeaderDto leaderDto1  = leaderService.createNewLeader(leader);
-
-     return ResponseEntity.status(HttpStatus.OK).body(Map.of(
-             "message","You Successfully Accessed As Leader",
-             "Leader" , leaderDto1
-     ));
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<Map<String,Object>> registerNewLeader(@RequestBody Leader leader){
+//     LeaderDto leaderDto1  = leaderService.createNewLeader(leader);
+//
+//     return ResponseEntity.status(HttpStatus.OK).body(Map.of(
+//             "message","You Successfully Accessed As Leader",
+//             "Leader" , leaderDto1
+//     ));
+//    }
 
 
     @GetMapping("/getProfile/{leaderId}/profile")

@@ -14,14 +14,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/families")
+@RequestMapping("/admin/families")
 public class FamilyControllerImplementation {
 
     @Autowired
     FamilyServiceInterface familyService;
-
-
-
+    
     @GetMapping("/getAllFamilies")
     public ResponseEntity<Map<String , Object>> getAllFamily(){
        List<Family> familyList = familyService.getAllFamily();

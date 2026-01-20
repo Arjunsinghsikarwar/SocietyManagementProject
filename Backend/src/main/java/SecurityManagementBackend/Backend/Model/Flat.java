@@ -1,5 +1,6 @@
 package SecurityManagementBackend.Backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Flat {
 
     @OneToOne
     @JoinColumn(name = "family_id")
+    @JsonIgnore
     private Family family;
 
     public Flat() {

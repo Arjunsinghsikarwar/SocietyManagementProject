@@ -1,11 +1,14 @@
 package SecurityManagementBackend.Backend.Model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 public class Member {
 
     @Id
@@ -19,6 +22,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "family_id")
+    @JsonIgnore
     private Family family;
 
     @OneToMany(mappedBy = "member" , cascade = CascadeType.ALL , orphanRemoval = true)

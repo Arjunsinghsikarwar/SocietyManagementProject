@@ -27,14 +27,18 @@ public class AdminControllerImplementation {
     }
 
 
-
-    @PostMapping("/assignLeader/{leaderId}/toFamily/{familyId}")
-    public ResponseEntity<Map<String, Object>> assignLeader(@PathVariable Long leaderId, @PathVariable Long familyId) {
-      LeaderDto leaderDto  = adminService.assigningLeaderToFamily(leaderId, familyId);
+    @PostMapping("/assigningAllInfoToFamily/family/familyId/{familyId}")
+    public ResponseEntity<Map<String, Object>> assignLeader(@RequestBody Family family, @PathVariable Long familyId) {
+      Family family1  = adminService.assigningAllInfoToFamily(family, familyId);
       return ResponseEntity.status(HttpStatus.OK).body(Map.of(
               "message" , "Successfully Assigned",
-              "leaderDto" , leaderDto
+              "family" , family1
       ));
+    }
+
+    @GetMapping("/getFamily/{familyId}")
+    public ResponseEntity<Family> getFamily(@PathVariable Long familyId){
+        return ResponseEntity.status(HttpStatus.OK).body(adminService.getFamily(familyId));
     }
 }
 

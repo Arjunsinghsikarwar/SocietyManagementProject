@@ -1,6 +1,7 @@
 
 package SecurityManagementBackend.Backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Complaint {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     public Complaint() {

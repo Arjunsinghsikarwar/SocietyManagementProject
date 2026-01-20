@@ -36,6 +36,7 @@ public class SpringSecurityConfiguration {
                 .authorizeHttpRequests(request -> request.requestMatchers("/login" , "/register").permitAll()
                         .requestMatchers("/leader/**").hasRole("LEADER")
                         .requestMatchers("/member/**").hasAnyRole("MEMBER","LEADER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

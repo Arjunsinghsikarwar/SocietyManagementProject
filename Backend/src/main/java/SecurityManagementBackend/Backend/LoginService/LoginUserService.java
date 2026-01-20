@@ -20,8 +20,13 @@ public class LoginUserService {
     public void isExist(UserLogin userLogin) {
        UserInfo userInfo = userInfoRepo.findByUserName(userLogin.getUserName());
 
-       if(userInfo==null)
-           throw new UserDoNotExistException(userLogin.getUserName());
+       if(userInfo==null) {
+           if (userLogin.getUserName() != null)
+               throw new UserDoNotExistException(userLogin.getUserName());
+           else
+               throw new IllegalArgumentException("Username must not be null");
+
+       }
 
 
        // I have to change this , just learning purpose.
